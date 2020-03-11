@@ -1,8 +1,10 @@
 call plug#begin('~\vimfiles\plugged')
 
-Plug 'PratikBhusal/vim-grip'
 Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/VimCompletesMe'
+Plug 'blueyed/vim-diminactive'
+Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dhruvasagar/vim-vinegar'

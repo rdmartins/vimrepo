@@ -1,11 +1,10 @@
 so ~\vimfiles\plugins.vim
 
-set background=dark
-set encoding=utf-8
 set expandtab
 set gdefault
 set hidden
 set hlsearch
+set list
 set noshowmode
 set noswapfile
 set nowrap
@@ -26,7 +25,6 @@ if has('gui_running')
   set guioptions=rL
   set lines=37
   set renderoptions=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
-  set spell
 endif
 
 let mapleader = ','
@@ -35,18 +33,11 @@ nmap <Leader>ev :e $MYVIMRC<CR>
 nmap <Leader>ep :e $HOME\vimfiles\plugins.vim<CR>
 vmap <C-c> "+y
 nmap <Leader>ft :setfiletype
-nmap <Leader><Space> :nohlsearch<CR>
 nmap <silent> <Leader>q :bd<CR> :echo 'Buffer deleted'<CR>
 imap AA <C-O>A
 imap II <C-O>I
-nmap <C-H> <C-W><C-H>
-nmap <C-J> <C-W><C-J>
-nmap <C-K> <C-W><C-K>
-nmap <C-L> <C-W><C-L>
 
 nmap <C-S> :Startify<cr>
-
-nmap <silent> <leader>/ :NERDTreeToggle<cr>
 
 nmap <Leader>g :e#<CR>
 nmap <Leader>1 <Plug>AirlineSelectTab1
@@ -82,39 +73,25 @@ let g:gitgutter_max_signs = 1000
 
 let g:startify_custom_header = []
 
-let g:ale_linters_explicit = 1
-let g:ale_linters = {
-      \   'sql': ['sqlint'],
-      \   'vim': ['vint'],
-      \   'yaml': ['yamllint'],
-      \}
+let g:diminactive_use_syntax = 1
 
-let g:polyglot_disabled = ['latex']
-
-let vim_markdown_preview_github=1
-
-"nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
-"nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
-"nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
-"nnoremap <silent> <Leader><Space> :call gruvbox#hls_hide()<CR>
-
-"nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-"nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-"nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+let g:csv_autocmd_arrange    = 1
+let g:csv_autocmd_arrange_size = 1024*1024
 
 com! FormatXML :setfiletype xml|%!py -c "import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())"
 
 augroup vimrc
-  autocmd!
-  autocmd BufWritePost _vimrc source %
-  autocmd BufWritePost plugins.vim source %
+  au!
+  au BufWritePost _vimrc source %
+  au BufWritePost plugins.vim source %
 
-  autocmd BufRead *.csv :%ArrangeColumn!
-  autocmd BufWrite *.csv :%UnArrangeColumn
-  autocmd BufWritePost *.csv :%ArrangeColumn!
+  au VimEnter * RainbowParenthesesToggle
+  au Syntax * RainbowParenthesesLoadRound
+  au Syntax * RainbowParenthesesLoadSquare
+  au Syntax * RainbowParenthesesLoadBraces
+  au Syntax * RainbowParenthesesLoadChevrons
 
-  autocmd VimEnter * RainbowParenthesesToggle
-  autocmd Syntax * RainbowParenthesesLoadRound
-  autocmd Syntax * RainbowParenthesesLoadSquare
-  autocmd Syntax * RainbowParenthesesLoadBraces
+  au WinEnter * set cul
+  au WinLeave * set nocul
 augroup END
+

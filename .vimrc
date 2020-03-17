@@ -1,4 +1,4 @@
-so ~\vimfiles\plugins.vim
+so ~/.vim/plugins.vim
 
 set expandtab
 set gdefault
@@ -19,19 +19,16 @@ set tabstop=2
 colorscheme onedark
 
 if has('gui_running')
-  set columns=140
   set cursorline
-  set guifont=Fira_Code:h11
+  set guifont=Fira\ Code\ 11
   set guioptions=rL
-  set lines=37
-  set renderoptions=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 endif
 
 let mapleader = ','
 let maplocalleader = '\\'
 nmap <Leader>ev :e $MYVIMRC<CR>
-nmap <Leader>ep :e $HOME\vimfiles\plugins.vim<CR>
-vmap <C-c> "+y
+nmap <Leader>ep :e ~/.vim/plugins.vim<CR>
+vmap <C-c> '+y
 nmap <Leader>ft :setfiletype
 nmap <silent> <Leader>q :bd<CR> :echo 'Buffer deleted'<CR>
 imap AA <C-O>A
@@ -78,7 +75,7 @@ let g:diminactive_use_syntax = 1
 let g:csv_autocmd_arrange    = 1
 let g:csv_autocmd_arrange_size = 1024*1024
 
-com! FormatXML :setfiletype xml|%!py -c "import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())"
+com! FormatXML :setfiletype xml|%!py -c 'import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())'
 
 augroup vimrc
   au!

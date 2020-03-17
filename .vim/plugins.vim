@@ -1,4 +1,4 @@
-call plug#begin('~\vimfiles\plugged')
+call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/VimCompletesMe'

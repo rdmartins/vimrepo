@@ -16,6 +16,8 @@ set spelllang=pt,en
 set splitbelow
 set splitright
 set tabstop=2
+set ignorecase
+set smartcase
 colorscheme onedark
 
 if has('gui_running')
@@ -58,7 +60,7 @@ let g:ctrlp_custom_ignore = {
       \ 'file': '\v\/\.(exe|so|dll)$'
       \ }
 
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -89,7 +91,7 @@ augroup vimrc
   au Syntax * RainbowParenthesesLoadRound
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
-  au Syntax * RainbowParenthesesLoadChevrons
+  "au Syntax * RainbowParenthesesLoadChevrons
 
   au WinEnter * set cul
   au WinLeave * set nocul

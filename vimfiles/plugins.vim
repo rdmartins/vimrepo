@@ -1,31 +1,32 @@
 call plug#begin('~\vimfiles\plugged')
 
-Plug 'w0rp/ale'
+Plug 'RobertAndradeJr/vim-mjml', {' for': 'mjml' }
+Plug 'airblade/vim-gitgutter'
+Plug 'ajh17/VimCompletesMe'
+Plug 'blueyed/vim-diminactive'
 Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'raimondi/delimitmate'
-Plug 'mattn/emmet-vim', { 'for': 'html' }
-Plug 'camspiers/lens.vim'
-Plug 'scrooloose/nerdcommenter'
+Plug 'dhruvasagar/vim-vinegar'
+Plug 'easymotion/vim-easymotion'
+Plug 'rdmartins/todo.txt-vim', { 'for': 'todo.txt' }
 Plug 'joshdick/onedark.vim'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'vim-scripts/utl.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'blueyed/vim-diminactive'
-Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'valloric/vim-indent-guides'
-Plug 'RobertAndradeJr/vim-mjml'
+Plug 'mattn/emmet-vim', { 'for': 'html' }
+Plug 'mhinz/vim-startify'
+Plug 'raimondi/delimitmate'
+Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
-Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'dhruvasagar/vim-vinegar'
-Plug 'ajh17/VimCompletesMe'
+Plug 'valloric/vim-indent-guides'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/utl.vim'
+Plug 'w0rp/ale'
 
 call plug#end()

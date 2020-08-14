@@ -9,6 +9,7 @@ set noshowmode
 set noswapfile
 set nowrap
 set number
+set relativenumber
 set shiftwidth=2
 set showtabline=2
 set softtabstop=2
@@ -16,25 +17,34 @@ set spelllang=pt,en
 set splitbelow
 set splitright
 set tabstop=2
+set ignorecase
+set smartcase
 colorscheme onedark
 
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
+set wildignore +=.git
+set wildignore +=node_modules
+
 if has('gui_running')
+  set columns=140
   set cursorline
-  set guifont=Fira\ Code\ 11
+  set guifont=Fira\ Code\ 12
   set guioptions=rL
+  set lines=37
 endif
 
 let mapleader = ','
-let maplocalleader = '\\'
+let maplocalleader = '\'
 nmap <Leader>ev :e $MYVIMRC<CR>
 nmap <Leader>ep :e ~/.vim/plugins.vim<CR>
-vmap <C-c> '+y
+nmap <Leader>sc :SClose<cr>
+vmap <C-c> "+y
 nmap <Leader>ft :setfiletype
 nmap <silent> <Leader>q :bd<CR> :echo 'Buffer deleted'<CR>
 imap AA <C-O>A
 imap II <C-O>I
-
-nmap <C-S> :Startify<cr>
 
 nmap <Leader>g :e#<CR>
 nmap <Leader>1 <Plug>AirlineSelectTab1
@@ -49,31 +59,48 @@ nmap <Leader>9 <Plug>AirlineSelectTab9
 nmap <Leader>b <Plug>AirlineSelectPrevTab
 nmap <Leader>f <Plug>AirlineSelectNextTab
 
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v\/(\.git|node_modules)$',
-      \ 'file': '\v\/\.(exe|so|dll)$'
-      \ }
-
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_skip_empty_sections = 1
+let g:airline_section_b = '%{fugitive#statusline()}'
+
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'javascript': 'prettier, eslint',
+  \ 'json': 'prettier',
+  \ 'yaml': 'prettier',
+  \}
+
+let g:csv_autocmd_arrange    = 1
+let g:csv_autocmd_arrange_size = 1024*1024
+
+let g:ctrlp_open_new_file = 'r'
+
+"let g:diminactive_use_syntax = 1
+
+let g:gitgutter_max_signs = 1000
 
 if has('gui_running')
   let g:indent_guides_enable_on_vim_startup = 1
   let g:indent_guides_color_change_percent = 2
 endif
 
-let g:gitgutter_max_signs = 1000
-
-let g:startify_custom_header = []
-
-let g:diminactive_use_syntax = 1
-
-let g:csv_autocmd_arrange    = 1
-let g:csv_autocmd_arrange_size = 1024*1024
+let g:startify_session_persistence = 1
+let g:startify_lists = [
+  \ { 'type': 'sessions', 'header': ['   Sessions'] },
+  \ { 'type': 'files',    'header': ['   MRU']      },
+  \ ]
+let g:startify_custom_header = [
+  \ '   ██████╗ ██████╗ ███╗   ███╗ █████╗ ██████╗ ████████╗██╗███╗   ██╗███████╗ ',
+  \ '   ██╔══██╗██╔══██╗████╗ ████║██╔══██╗██╔══██╗╚══██╔══╝██║████╗  ██║██╔════╝ ',
+  \ '   ██████╔╝██║  ██║██╔████╔██║███████║██████╔╝   ██║   ██║██╔██╗ ██║███████╗ ',
+  \ '   ██╔══██╗██║  ██║██║╚██╔╝██║██╔══██║██╔══██╗   ██║   ██║██║╚██╗██║╚════██║ ',
+  \ '   ██║  ██║██████╔╝██║ ╚═╝ ██║██║  ██║██║  ██║   ██║   ██║██║ ╚████║███████║ ',
+  \ '   ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝╚══════╝ ',
+  \ ]
 
 com! FormatXML :setfiletype xml|%!py -c 'import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())'
 
@@ -86,9 +113,8 @@ augroup vimrc
   au Syntax * RainbowParenthesesLoadRound
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
-  au Syntax * RainbowParenthesesLoadChevrons
+  "au Syntax * RainbowParenthesesLoadChevrons
 
   au WinEnter * set cul
   au WinLeave * set nocul
 augroup END
-

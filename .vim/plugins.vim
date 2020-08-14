@@ -1,19 +1,18 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'godlygeek/tabular'
 Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/VimCompletesMe'
-Plug 'blueyed/vim-diminactive'
-Plug 'camspiers/animate.vim'
-Plug 'camspiers/lens.vim'
-Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+Plug 'chrisbra/csv.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dhruvasagar/vim-vinegar'
 Plug 'easymotion/vim-easymotion'
 Plug 'joshdick/onedark.vim'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'mattn/emmet-vim', { 'for': 'html' }
+Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 Plug 'raimondi/delimitmate'
+Plug 'rdmartins/todo.txt-vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'

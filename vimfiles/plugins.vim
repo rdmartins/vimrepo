@@ -1,21 +1,20 @@
 call plug#begin('~\vimfiles\plugged')
 
-Plug 'RobertAndradeJr/vim-mjml', {' for': 'mjml' }
 Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/VimCompletesMe'
-Plug 'blueyed/vim-diminactive'
-Plug 'camspiers/animate.vim'
-Plug 'camspiers/lens.vim'
-Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+"Plug 'chrisbra/csv.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dhruvasagar/vim-vinegar'
+Plug 'tpope/vim-vinegar'
 Plug 'easymotion/vim-easymotion'
-Plug 'rdmartins/todo.txt-vim', { 'for': 'todo.txt' }
+Plug 'godlygeek/tabular'
 Plug 'joshdick/onedark.vim'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'mattn/emmet-vim', { 'for': 'html' }
+Plug 'majutsushi/tagbar'
+Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 Plug 'raimondi/delimitmate'
+Plug 'rdmartins/todo.txt-vim'
+Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'

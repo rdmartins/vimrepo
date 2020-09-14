@@ -1,5 +1,9 @@
 so ~\vimfiles\plugins.vim
 
+filetype plugin on
+
+let $TMP="C:/Users/rdmartins/AppData/Local/Temp"
+
 set expandtab
 set gdefault
 set hidden
@@ -10,7 +14,6 @@ set noswapfile
 set nowrap
 set number
 set relativenumber
-set shell=pwsh
 set shiftwidth=2
 set showtabline=2
 set softtabstop=2
@@ -45,7 +48,6 @@ nmap <Leader>sc :SClose<cr>
 vmap <C-c> "+y
 nmap <Leader>ft :setfiletype
 nmap <silent> <Leader>q :bd<CR> :echo 'Buffer deleted'<CR>
-"nnoremap <silent> <C-space> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 imap AA <C-O>A
 imap II <C-O>I
 
@@ -62,42 +64,55 @@ nmap <Leader>9 <Plug>AirlineSelectTab9
 nmap <Leader>b <Plug>AirlineSelectPrevTab
 nmap <Leader>f <Plug>AirlineSelectNextTab
 
-let g:ctrlp_open_new_file = 'r'
-
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_skip_empty_sections = 1
-let g:airline_section_b = "%{fugitive#statusline()}"
+let g:airline_section_b = '%{fugitive#statusline()}'
+
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'javascript': 'prettier, eslint',
+  \ 'json': 'prettier',
+  \ 'rust': 'rustfmt',
+  \ 'yaml': 'prettier',
+  \}
+
+let g:csv_autocmd_arrange    = 1
+let g:csv_autocmd_arrange_size = 1024*1024
+
+let g:ctrlp_open_new_file = 'r'
+
+"let g:diminactive_use_syntax = 1
+
+let g:gitgutter_max_signs = 1000
 
 if has('gui_running')
   let g:indent_guides_enable_on_vim_startup = 1
   let g:indent_guides_color_change_percent = 2
 endif
 
-let g:gitgutter_max_signs = 1000
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 let g:startify_session_persistence = 1
 let g:startify_lists = [
-			\ { 'type': 'sessions',  'header': ['   Sessions']       },
-			\ { 'type': 'files',     'header': ['   MRU']            },
-			\ ]
+  \ { 'type': 'sessions', 'header': ['   Sessions'] },
+  \ { 'type': 'files',    'header': ['   MRU']      },
+  \ ]
 let g:startify_custom_header = [
-			\ "   ██████╗ ██████╗ ███╗   ███╗ █████╗ ██████╗ ████████╗██╗███╗   ██╗███████╗ ",
-			\ "   ██╔══██╗██╔══██╗████╗ ████║██╔══██╗██╔══██╗╚══██╔══╝██║████╗  ██║██╔════╝ ",
-			\ "   ██████╔╝██║  ██║██╔████╔██║███████║██████╔╝   ██║   ██║██╔██╗ ██║███████╗ ",
-			\ "   ██╔══██╗██║  ██║██║╚██╔╝██║██╔══██║██╔══██╗   ██║   ██║██║╚██╗██║╚════██║ ",
-			\ "   ██║  ██║██████╔╝██║ ╚═╝ ██║██║  ██║██║  ██║   ██║   ██║██║ ╚████║███████║ ",
-			\ "   ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝╚══════╝ ",
-			\ ]
+  \ '   ██████╗ ██████╗ ███╗   ███╗ █████╗ ██████╗ ████████╗██╗███╗   ██╗███████╗ ',
+  \ '   ██╔══██╗██╔══██╗████╗ ████║██╔══██╗██╔══██╗╚══██╔══╝██║████╗  ██║██╔════╝ ',
+  \ '   ██████╔╝██║  ██║██╔████╔██║███████║██████╔╝   ██║   ██║██╔██╗ ██║███████╗ ',
+  \ '   ██╔══██╗██║  ██║██║╚██╔╝██║██╔══██║██╔══██╗   ██║   ██║██║╚██╗██║╚════██║ ',
+  \ '   ██║  ██║██████╔╝██║ ╚═╝ ██║██║  ██║██║  ██║   ██║   ██║██║ ╚████║███████║ ',
+  \ '   ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝╚══════╝ ',
+  \ ]
 
-let g:diminactive_use_syntax = 1
+nnoremap <silent> <F9> :TagbarToggle<CR>
 
-let g:csv_autocmd_arrange    = 1
-let g:csv_autocmd_arrange_size = 1024*1024
-
-com! FormatXML :setfiletype xml|%!py -c "import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())"
+com! FormatXML :setfiletype xml|%!py -c 'import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())'
 
 augroup vimrc
   au!
@@ -108,9 +123,8 @@ augroup vimrc
   au Syntax * RainbowParenthesesLoadRound
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
-  "au Syntax * RainbowParenthesesLoadChevrons
+  au Syntax * RainbowParenthesesLoadChevrons
 
   au WinEnter * set cul
   au WinLeave * set nocul
 augroup END
-

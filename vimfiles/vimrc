@@ -2,8 +2,6 @@ so ~\vimfiles\plugins.vim
 
 filetype plugin on
 
-let $TMP="C:/Users/rdmartins/AppData/Local/Temp"
-
 set expandtab
 set gdefault
 set hidden

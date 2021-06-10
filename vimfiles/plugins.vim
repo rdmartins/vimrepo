@@ -17,6 +17,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'valloric/vim-indent-guides'
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'

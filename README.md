@@ -1,9 +1,5 @@
 # The best way to store your dotfiles: A bare Git repository
 
-_This instructions are from durdn, you can check it here: https://www.atlassian.com/git/tutorials/dotfiles_
-
-_User `StreakyCobra` [showed his elegant setup](https://news.ycombinator.com/item?id=11071754) and ... It made so much sense!_
-
 The technique consists in storing a [Git bare repository](http://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/) in a "_side_" folder (like `$HOME/.cfg` or `$HOME/.myconfig`) using a specially crafted alias so that commands are run against that repository and not the usual `.git` local folder, which would interfere with any other Git repositories around.
 
 ## Starting from scratch
@@ -22,12 +18,6 @@ echo "alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> $H
 * We set a flag - local to the repository - to hide files we are not explicitly tracking yet. This is so that when you type `config status` and other commands later, files you are not interested in tracking will not show up as `untracked`.
 * Also you can add the alias definition by hand to your `.bashrc` or use the the fourth line provided for convenience.
 
-I packaged the above lines into a [snippet](https://bitbucket.org/snippets/nicolapaolucci/ergX9) up on Bitbucket and linked it from a short-url. So that you can set things up with:
-
-```shell
-curl -Lks http://bit.do/cfg-init | /bin/bash
-```
-
 After you've executed the setup any file within the `$HOME` folder can be versioned with normal commands, replacing `git` with your newly created `config` alias, like:
 
 ```shell
@@ -39,9 +29,9 @@ config commit -m "Add bashrc"
 config push
 ```
 
-##Install your dotfiles onto a new system (or migrate to this setup)
+## Install your dotfiles onto a new system (or migrate to this setup)
 
-If you already store your configuration/dotfiles in a [Git repository](https://www.atlassian.com/git), on a new system you can migrate to this setup with the following steps:
+If you already store your configuration/dotfiles in a Git repository, on a new system you can migrate to this setup with the following steps:
 
 * Prior to the installation make sure you have committed the alias to your `.bashrc` or `.zsh`:
 
@@ -114,27 +104,10 @@ config commit -m "Add bashrc"
 config push
 ```
 
-Again as a shortcut not to have to remember all these steps on any new machine you want to setup, you can create a simple script, [store it as Bitbucket snippet](https://bitbucket.org/snippets/nicolapaolucci/7rE9K) like I did, [create a short url](http://bit.do/) for it and call it like this:
+## Credits
 
-```shell
-curl -Lks http://bit.do/cfg-install | /bin/bash
-```
+This instructions are based on [Nicola Paolucci](https://twitter.com/durdn) instructions.
+You can check it here: https://www.atlassian.com/git/tutorials/dotfiles.
 
-For completeness this is what I ended up with (tested on many freshly minted [Alpine Linux](http://www.alpinelinux.org/) containers to test it out):
+Also, thank you [StreakyCobra](https://news.ycombinator.com/item?id=11071754).
 
-```shell
-git clone --bare https://bitbucket.org/durdn/cfg.git $HOME/.cfg
-function config {
-   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
-}
-mkdir -p .config-backup
-config checkout
-if [ $? = 0 ]; then
-  echo "Checked out config.";
-  else
-    echo "Backing up pre-existing dot files.";
-    config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
-fi;
-config checkout
-config config status.showUntrackedFiles no
-```

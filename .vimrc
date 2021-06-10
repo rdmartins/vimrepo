@@ -1,9 +1,13 @@
 so ~/.vim/plugins.vim
 
+filetype plugin on
+
+set colorcolumn=80
 set expandtab
 set gdefault
 set hidden
 set hlsearch
+set ignorecase
 set list
 set noshowmode
 set noswapfile
@@ -12,35 +16,34 @@ set number
 set relativenumber
 set shiftwidth=2
 set showtabline=2
+set smartcase
 set softtabstop=2
+set spell
 set spelllang=pt,en
 set splitbelow
 set splitright
 set tabstop=2
-set ignorecase
-set smartcase
-colorscheme onedark
 
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+set background=dark
+colorscheme solarized
+call togglebg#map("<F5>")
 
 set wildignore +=.git
 set wildignore +=node_modules
 
 if has('gui_running')
-  set columns=140
+  set columns=100
   set cursorline
   set guifont=Fira\ Code\ 12
-  set guioptions=rL
+  set guioptions=P
   set lines=37
 endif
 
 let mapleader = ','
 let maplocalleader = '\'
 nmap <Leader>ev :e $MYVIMRC<CR>
-nmap <Leader>ep :e ~/.vim/plugins.vim<CR>
+nmap <Leader>ep :e $HOME/.vim/plugins.vim<CR>
 nmap <Leader>sc :SClose<cr>
-vmap <C-c> "+y
 nmap <Leader>ft :setfiletype
 nmap <silent> <Leader>q :bd<CR> :echo 'Buffer deleted'<CR>
 imap AA <C-O>A
@@ -74,12 +77,10 @@ let g:ale_fixers = {
   \ 'yaml': 'prettier',
   \}
 
-let g:csv_autocmd_arrange    = 1
+let g:csv_autocmd_arrange = 1
 let g:csv_autocmd_arrange_size = 1024*1024
 
 let g:ctrlp_open_new_file = 'r'
-
-"let g:diminactive_use_syntax = 1
 
 let g:gitgutter_max_signs = 1000
 
@@ -87,6 +88,8 @@ if has('gui_running')
   let g:indent_guides_enable_on_vim_startup = 1
   let g:indent_guides_color_change_percent = 2
 endif
+
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 let g:startify_session_persistence = 1
 let g:startify_lists = [
@@ -102,18 +105,16 @@ let g:startify_custom_header = [
   \ '   ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝╚══════╝ ',
   \ ]
 
-com! FormatXML :setfiletype xml|%!py -c 'import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())'
-
 augroup vimrc
   au!
-  au BufWritePost _vimrc source %
+  au BufWritePost .vimrc source %
   au BufWritePost plugins.vim source %
 
   au VimEnter * RainbowParenthesesToggle
   au Syntax * RainbowParenthesesLoadRound
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
-  "au Syntax * RainbowParenthesesLoadChevrons
+  au Syntax * RainbowParenthesesLoadChevrons
 
   au WinEnter * set cul
   au WinLeave * set nocul

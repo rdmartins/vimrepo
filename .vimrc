@@ -24,9 +24,9 @@ set splitbelow
 set splitright
 set tabstop=2
 
-set background=dark
-colorscheme solarized
-call togglebg#map("<F5>")
+set termguicolors
+let ayucolor="light"
+colorscheme ayu
 
 set wildignore +=.git
 set wildignore +=node_modules
